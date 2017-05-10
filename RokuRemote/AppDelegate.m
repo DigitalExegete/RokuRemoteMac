@@ -7,16 +7,27 @@
 //
 
 #import "AppDelegate.h"
+#import "RokuRemote-Swift.h"
+#include <curl/curl.h>
+#include "RokuRemoteNetworkInterface.h"
 
 @interface AppDelegate ()
-
 @property (weak) IBOutlet NSWindow *window;
+@property (strong) IBOutlet RemoteViewController *remoteViewController;
+
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// Insert code here to initialize your application
+	
+	RokuRemoteNetworkInterface *rrni = [RokuRemoteNetworkInterface new];
+	
+	[rrni configureSession];
+	
+	[rrni sendRokuCommand:Play];
+	
 }
 
 

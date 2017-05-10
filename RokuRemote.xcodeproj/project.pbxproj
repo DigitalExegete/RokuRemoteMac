@@ -11,6 +11,10 @@
 		ED1C197B1EAD90D100941838 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1C197A1EAD90D100941838 /* main.m */; };
 		ED1C197D1EAD90D100941838 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED1C197C1EAD90D100941838 /* Assets.xcassets */; };
 		ED1C19801EAD90D100941838 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED1C197E1EAD90D100941838 /* MainMenu.xib */; };
+		ED1C198F1EAD96E700941838 /* RemoteURLDelegete.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1C198E1EAD96E700941838 /* RemoteURLDelegete.swift */; };
+		ED27A3371EADCD39009C152B /* RemoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED27A3361EADCD39009C152B /* RemoteViewController.swift */; };
+		ED27A33A1EADDF54009C152B /* libcurl.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ED27A3391EADDF54009C152B /* libcurl.tbd */; };
+		ED27A33D1EADE385009C152B /* RokuRemoteNetworkInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = ED27A33C1EADE385009C152B /* RokuRemoteNetworkInterface.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +25,12 @@
 		ED1C197C1EAD90D100941838 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED1C197F1EAD90D100941838 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		ED1C19811EAD90D100941838 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED1C19881EAD93EE00941838 /* RokuRemote-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RokuRemote-Bridging-Header.h"; sourceTree = "<group>"; };
+		ED1C198E1EAD96E700941838 /* RemoteURLDelegete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoteURLDelegete.swift; path = RemoteController/RemoteURLDelegete.swift; sourceTree = "<group>"; };
+		ED27A3361EADCD39009C152B /* RemoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoteViewController.swift; path = RemoteController/RemoteViewController.swift; sourceTree = "<group>"; };
+		ED27A3391EADDF54009C152B /* libcurl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurl.tbd; path = usr/lib/libcurl.tbd; sourceTree = SDKROOT; };
+		ED27A33B1EADE385009C152B /* RokuRemoteNetworkInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RokuRemoteNetworkInterface.h; sourceTree = "<group>"; };
+		ED27A33C1EADE385009C152B /* RokuRemoteNetworkInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RokuRemoteNetworkInterface.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED27A33A1EADDF54009C152B /* libcurl.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -39,6 +50,7 @@
 			children = (
 				ED1C19751EAD90D100941838 /* RokuRemote */,
 				ED1C19741EAD90D100941838 /* Products */,
+				ED27A3381EADDF54009C152B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -53,6 +65,7 @@
 		ED1C19751EAD90D100941838 /* RokuRemote */ = {
 			isa = PBXGroup;
 			children = (
+				ED1C19871EAD93B700941838 /* RemoteController */,
 				ED1C19761EAD90D100941838 /* AppDelegate.h */,
 				ED1C19771EAD90D100941838 /* AppDelegate.m */,
 				ED1C197C1EAD90D100941838 /* Assets.xcassets */,
@@ -69,6 +82,26 @@
 				ED1C197A1EAD90D100941838 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ED1C19871EAD93B700941838 /* RemoteController */ = {
+			isa = PBXGroup;
+			children = (
+				ED27A3361EADCD39009C152B /* RemoteViewController.swift */,
+				ED1C19881EAD93EE00941838 /* RokuRemote-Bridging-Header.h */,
+				ED1C198E1EAD96E700941838 /* RemoteURLDelegete.swift */,
+				ED27A33B1EADE385009C152B /* RokuRemoteNetworkInterface.h */,
+				ED27A33C1EADE385009C152B /* RokuRemoteNetworkInterface.m */,
+			);
+			name = RemoteController;
+			sourceTree = "<group>";
+		};
+		ED27A3381EADDF54009C152B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ED27A3391EADDF54009C152B /* libcurl.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -103,6 +136,7 @@
 					ED1C19721EAD90D100941838 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = VW5M3863V7;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -142,8 +176,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED27A3371EADCD39009C152B /* RemoteViewController.swift in Sources */,
+				ED1C198F1EAD96E700941838 /* RemoteURLDelegete.swift in Sources */,
 				ED1C197B1EAD90D100941838 /* main.m in Sources */,
 				ED1C19781EAD90D100941838 /* AppDelegate.m in Sources */,
+				ED27A33D1EADE385009C152B /* RokuRemoteNetworkInterface.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,12 +289,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = VW5M3863V7;
 				INFOPLIST_FILE = RokuRemote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tmmt.RokuRemote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RokuRemote/RokuRemote-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -265,12 +306,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = VW5M3863V7;
 				INFOPLIST_FILE = RokuRemote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tmmt.RokuRemote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RokuRemote/RokuRemote-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -293,6 +337,7 @@
 				ED1C19861EAD90D100941838 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
