@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16F67a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="RokuRemoteChannelCollectionViewItem">
+            <connections>
+                <outlet property="imageView" destination="IKQ-gs-YIA" id="dTh-wT-XOW"/>
+                <outlet property="textField" destination="8Fg-pG-qFa" id="O63-jj-R4d"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView wantsLayer="YES" id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Fg-pG-qFa">
+                    <rect key="frame" x="-2" y="4" width="100" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="uzh-pM-9BC"/>
+                    </constraints>
+                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Channel Name" id="Fuv-97-GEY">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.representedObject.channelName" id="LvM-HP-24L"/>
+                    </connections>
+                </textField>
+                <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IKQ-gs-YIA">
+                    <rect key="frame" x="16" y="26" width="64" height="64"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="OXf-P9-bYT"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="dRl-qX-2Ap"/>
+                        <constraint firstAttribute="width" secondItem="IKQ-gs-YIA" secondAttribute="height" multiplier="1:1" id="oix-nl-Z92"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="WSX-sj-Kis"/>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.representedObject.channelImage" id="iMb-Bl-v2n"/>
+                    </connections>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="IKQ-gs-YIA" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="6" id="0LD-dj-3jM"/>
+                <constraint firstAttribute="bottom" secondItem="8Fg-pG-qFa" secondAttribute="bottom" constant="4" id="KaL-xi-wNe"/>
+                <constraint firstItem="8Fg-pG-qFa" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="O7i-lG-tqp"/>
+                <constraint firstAttribute="trailing" secondItem="8Fg-pG-qFa" secondAttribute="trailing" id="Voq-4j-J1I"/>
+                <constraint firstItem="IKQ-gs-YIA" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="16" id="iKh-ed-PYY"/>
+                <constraint firstAttribute="trailing" secondItem="IKQ-gs-YIA" secondAttribute="trailing" constant="16" id="uLs-8I-beG"/>
+            </constraints>
+            <point key="canvasLocation" x="-56" y="80"/>
+        </customView>
+    </objects>
+</document>

@@ -11,10 +11,15 @@
 		ED1C197B1EAD90D100941838 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1C197A1EAD90D100941838 /* main.m */; };
 		ED1C197D1EAD90D100941838 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED1C197C1EAD90D100941838 /* Assets.xcassets */; };
 		ED1C19801EAD90D100941838 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED1C197E1EAD90D100941838 /* MainMenu.xib */; };
-		ED1C198F1EAD96E700941838 /* RemoteURLDelegete.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1C198E1EAD96E700941838 /* RemoteURLDelegete.swift */; };
 		ED27A3371EADCD39009C152B /* RemoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED27A3361EADCD39009C152B /* RemoteViewController.swift */; };
 		ED27A33A1EADDF54009C152B /* libcurl.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ED27A3391EADDF54009C152B /* libcurl.tbd */; };
 		ED27A33D1EADE385009C152B /* RokuRemoteNetworkInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = ED27A33C1EADE385009C152B /* RokuRemoteNetworkInterface.m */; };
+		ED6CA1F71EC4C78900A8A640 /* RokuRemoteChannelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED6CA1F61EC4C78900A8A640 /* RokuRemoteChannelViewController.m */; };
+		ED6CA1FE1EC4FAE300A8A640 /* RokuRemoteChannelCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = ED6CA1FC1EC4FAE300A8A640 /* RokuRemoteChannelCollectionViewItem.m */; };
+		ED6CA1FF1EC4FAE300A8A640 /* RokuRemoteChannelCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED6CA1FD1EC4FAE300A8A640 /* RokuRemoteChannelCollectionViewItem.xib */; };
+		ED6CA2021EC53B1100A8A640 /* RokuChannelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ED6CA2011EC53B1100A8A640 /* RokuChannelModel.m */; };
+		EDE9F18B1EC2F1D8002B761B /* QCMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE9F1881EC2F1D8002B761B /* QCMethod.m */; };
+		EDE9F18C1EC2F1D8002B761B /* RokuRemoteCrosshairView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE9F18A1EC2F1D8002B761B /* RokuRemoteCrosshairView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,11 +31,21 @@
 		ED1C197F1EAD90D100941838 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		ED1C19811EAD90D100941838 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED1C19881EAD93EE00941838 /* RokuRemote-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RokuRemote-Bridging-Header.h"; sourceTree = "<group>"; };
-		ED1C198E1EAD96E700941838 /* RemoteURLDelegete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoteURLDelegete.swift; path = RemoteController/RemoteURLDelegete.swift; sourceTree = "<group>"; };
 		ED27A3361EADCD39009C152B /* RemoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoteViewController.swift; path = RemoteController/RemoteViewController.swift; sourceTree = "<group>"; };
 		ED27A3391EADDF54009C152B /* libcurl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurl.tbd; path = usr/lib/libcurl.tbd; sourceTree = SDKROOT; };
 		ED27A33B1EADE385009C152B /* RokuRemoteNetworkInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RokuRemoteNetworkInterface.h; sourceTree = "<group>"; };
 		ED27A33C1EADE385009C152B /* RokuRemoteNetworkInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RokuRemoteNetworkInterface.m; sourceTree = "<group>"; };
+		ED6CA1F51EC4C78900A8A640 /* RokuRemoteChannelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RokuRemoteChannelViewController.h; sourceTree = "<group>"; };
+		ED6CA1F61EC4C78900A8A640 /* RokuRemoteChannelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RokuRemoteChannelViewController.m; sourceTree = "<group>"; };
+		ED6CA1FB1EC4FAE300A8A640 /* RokuRemoteChannelCollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RokuRemoteChannelCollectionViewItem.h; sourceTree = "<group>"; };
+		ED6CA1FC1EC4FAE300A8A640 /* RokuRemoteChannelCollectionViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RokuRemoteChannelCollectionViewItem.m; sourceTree = "<group>"; };
+		ED6CA1FD1EC4FAE300A8A640 /* RokuRemoteChannelCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RokuRemoteChannelCollectionViewItem.xib; sourceTree = "<group>"; };
+		ED6CA2001EC53B1100A8A640 /* RokuChannelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RokuChannelModel.h; sourceTree = "<group>"; };
+		ED6CA2011EC53B1100A8A640 /* RokuChannelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RokuChannelModel.m; sourceTree = "<group>"; };
+		EDE9F1871EC2F1D8002B761B /* QCMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCMethod.h; sourceTree = "<group>"; };
+		EDE9F1881EC2F1D8002B761B /* QCMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCMethod.m; sourceTree = "<group>"; };
+		EDE9F1891EC2F1D8002B761B /* RokuRemoteCrosshairView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RokuRemoteCrosshairView.h; sourceTree = "<group>"; };
+		EDE9F18A1EC2F1D8002B761B /* RokuRemoteCrosshairView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RokuRemoteCrosshairView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,11 +102,21 @@
 		ED1C19871EAD93B700941838 /* RemoteController */ = {
 			isa = PBXGroup;
 			children = (
+				EDE9F1871EC2F1D8002B761B /* QCMethod.h */,
+				EDE9F1881EC2F1D8002B761B /* QCMethod.m */,
+				EDE9F1891EC2F1D8002B761B /* RokuRemoteCrosshairView.h */,
+				EDE9F18A1EC2F1D8002B761B /* RokuRemoteCrosshairView.m */,
 				ED27A3361EADCD39009C152B /* RemoteViewController.swift */,
 				ED1C19881EAD93EE00941838 /* RokuRemote-Bridging-Header.h */,
-				ED1C198E1EAD96E700941838 /* RemoteURLDelegete.swift */,
 				ED27A33B1EADE385009C152B /* RokuRemoteNetworkInterface.h */,
 				ED27A33C1EADE385009C152B /* RokuRemoteNetworkInterface.m */,
+				ED6CA1F51EC4C78900A8A640 /* RokuRemoteChannelViewController.h */,
+				ED6CA1F61EC4C78900A8A640 /* RokuRemoteChannelViewController.m */,
+				ED6CA1FB1EC4FAE300A8A640 /* RokuRemoteChannelCollectionViewItem.h */,
+				ED6CA1FC1EC4FAE300A8A640 /* RokuRemoteChannelCollectionViewItem.m */,
+				ED6CA1FD1EC4FAE300A8A640 /* RokuRemoteChannelCollectionViewItem.xib */,
+				ED6CA2001EC53B1100A8A640 /* RokuChannelModel.h */,
+				ED6CA2011EC53B1100A8A640 /* RokuChannelModel.m */,
 			);
 			name = RemoteController;
 			sourceTree = "<group>";
@@ -165,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED1C197D1EAD90D100941838 /* Assets.xcassets in Resources */,
+				ED6CA1FF1EC4FAE300A8A640 /* RokuRemoteChannelCollectionViewItem.xib in Resources */,
 				ED1C19801EAD90D100941838 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,8 +203,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED27A3371EADCD39009C152B /* RemoteViewController.swift in Sources */,
-				ED1C198F1EAD96E700941838 /* RemoteURLDelegete.swift in Sources */,
+				ED6CA2021EC53B1100A8A640 /* RokuChannelModel.m in Sources */,
+				EDE9F18C1EC2F1D8002B761B /* RokuRemoteCrosshairView.m in Sources */,
+				EDE9F18B1EC2F1D8002B761B /* QCMethod.m in Sources */,
 				ED1C197B1EAD90D100941838 /* main.m in Sources */,
+				ED6CA1FE1EC4FAE300A8A640 /* RokuRemoteChannelCollectionViewItem.m in Sources */,
+				ED6CA1F71EC4C78900A8A640 /* RokuRemoteChannelViewController.m in Sources */,
 				ED1C19781EAD90D100941838 /* AppDelegate.m in Sources */,
 				ED27A33D1EADE385009C152B /* RokuRemoteNetworkInterface.m in Sources */,
 			);

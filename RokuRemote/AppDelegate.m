@@ -22,11 +22,13 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// Insert code here to initialize your application
 	
-	RokuRemoteNetworkInterface *rrni = [RokuRemoteNetworkInterface new];
+//	[self.window setTitleVisibility:NSWindowTitleHidden];
+	[self.window setTitlebarAppearsTransparent:YES];
+	[self.window setAppearance:[NSAppearance appearanceNamed:NSAppearanceNameVibrantDark]];
 	
-	[rrni configureSession];
 	
-	[rrni sendRokuCommand:Play];
+	
+	
 	
 }
 

@@ -8,12 +8,13 @@
 
 import Cocoa
 
-@objc class RemoteViewController: NSViewController, URLSessionDelegate {
+@objc class RemoteViewController: NSViewController, URLSessionDelegate, NSTableViewDelegate, NSTableViewDataSource {
 	
-	var remoteInterface: RemoteNetworkInterface?
+	var remoteInterface: RokuRemoteNetworkInterface = RokuRemoteNetworkInterface()
 	
 	required init?(coder: NSCoder) {
 		
+		remoteInterface.configureSession()
 		super.init(coder: coder)
 	}
 	
@@ -24,6 +25,23 @@ import Cocoa
 	@IBAction func remoteButtonClicked(sender: Any?) {
 		
 		
+		
+	}
+	
+	override func mouseDown(with event: NSEvent) {
+		
+		var clickPoint = event.locationInWindow
+		clickPoint = self.view.convert(clickPoint, from: nil)
+		
+		let clickedLayer = self.view.layer?.hitTest(clickPoint)
+		
+		if let controlAction = clickedLayer?.value(forKey: "rokuAction") as! NSNumber?
+		{
+		
+			let realAction: RokuRemoteControlActions = RokuRemoteControlActions.init(rawValue: (controlAction.uintValue))!
+			remoteInterface.sendRokuKeypressCommand(realAction)
+			
+		}
 		
 	}
 	

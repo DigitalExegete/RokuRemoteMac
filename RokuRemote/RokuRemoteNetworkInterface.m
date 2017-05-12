@@ -5,9 +5,12 @@
 //  Created by William Jones on 4/24/17.
 //  Copyright © 2017 Treblotto Music & Music Technology. All rights reserved.
 //
-
+#import <Cocoa/Cocoa.h>
 #import "RokuRemoteNetworkInterface.h"
+#import "RokuRemote-Swift.h"
 #include <curl/curl.h>
+
+typedef BOOL (^BlockType)(NSDocument *, NSWindow *);
 
 @interface RokuRemoteNetworkInterface()
 
@@ -46,28 +49,122 @@
 	
 	self.rokuURLSession = [NSURLSession sessionWithConfiguration:rokuRemoteSessionConfig delegate:self delegateQueue:self.urlSessionQueue];
 	
-
+	
 	
 }
 
 - (NSURL *)generateURLForCommand:(RokuRemoteControlActions)action
 {
 
+	NSString *pathComponent = nil;
+	
+	switch (action)
+	{
+		case RokuRemoteOkay:
+			pathComponent = @"keypress/select";
+			break;
+		case RokuRemoteLeft:
+			pathComponent = @"keypress/left";
+			break;
+		case RokuRemoteRight:
+			pathComponent = @"keypress/right";
+			break;
+		default:
+			break;
+			
+	}
+
 	NSURL *rokuURL = [NSURL URLWithString:@"http://192.168.1.52:8060"];
 	
-	rokuURL = [rokuURL URLByAppendingPathComponent:@"query/active-app"];
+	rokuURL = [rokuURL URLByAppendingPathComponent:pathComponent];
 	
-
-	
-
-	
-//	NSString *baseUrl = @"http://192.168.1.52:8060/";
-//	
-//	NSString *retString = [baseUrl stringByAppendingString:@"query/active-app"];
-//
-//	return retString;
-//
 	return rokuURL;
+}
+
+- (NSURL *)generateURLForRequest:(RokuRemoteRequest)action channelID:(NSInteger)channelID
+{
+	
+	NSString *pathComponent = nil;
+	
+	switch (action)
+	{
+		case RokuRemoteRequestActiveApp:
+			pathComponent = @"query/active-app";
+			break;
+		case RokuRemoteRequestChannelIcon:
+			pathComponent = [NSString stringWithFormat:@"query/icon/%ld",channelID];
+			break;
+		case RokuRemoteRequestChannelListing:
+			pathComponent = @"query/apps";
+			break;
+		default:
+			break;
+			
+	}
+	
+	NSURL *rokuURL = [NSURL URLWithString:@"http://192.168.1.52:8060"];
+	
+	rokuURL = [rokuURL URLByAppendingPathComponent:pathComponent];
+	
+	return rokuURL;
+}
+
+
+- (void)sendRokuKeypressCommand:(RokuRemoteControlActions)action
+{
+	
+	NSMutableURLRequest *rokuDataRemoteRequest = [[NSURLRequest requestWithURL:[self generateURLForCommand:action]] mutableCopy];
+	[rokuDataRemoteRequest setHTTPMethod:@"POST"];
+	
+	NSURLSessionDataTask *task = [self.rokuURLSession dataTaskWithRequest:rokuDataRemoteRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+		
+		
+		
+	}];
+	
+	[task resume];
+
+	
+}
+
+- (void)sendRokuRequest:(RokuRemoteRequest)request channelID:(NSInteger)channelID
+{
+	
+	NSURLRequest *rokuDataRemoteRequest = [NSURLRequest requestWithURL:[self generateURLForRequest:request channelID:channelID]];
+	
+	NSURLSessionDataTask *task = [self.rokuURLSession dataTaskWithRequest:rokuDataRemoteRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+		
+		if (request == RokuRemoteRequestChannelIcon)
+		{
+			if (self.remoteDelegate)
+			{
+				if ([self.remoteDelegate respondsToSelector:@selector(networkInterface:receivedData:forChannel:)])
+				{
+					[[self remoteDelegate] networkInterface:self receivedData:data forChannel:channelID];
+				}
+			}
+		}
+		else
+		{
+			if (self.remoteDelegate)
+			{
+				if ([self.remoteDelegate respondsToSelector:@selector(networkInterface:receivedData:forRequest:)])
+				{
+					[[self remoteDelegate] networkInterface:self receivedData:data forRequest:request];
+				}
+			}
+		}
+		
+		
+		
+//		NSXMLDocument *document = [[NSXMLDocument alloc] initWithData:data options:0 error:nil];
+//		NSLog(@"Data is: %@", document);
+		
+	}];
+	
+	[task resume];
+
+	
 }
 
 - (NSInteger)sendRokuCommand:(RokuRemoteControlActions)action

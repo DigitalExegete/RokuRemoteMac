@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RokuRemote/RokuRemoteNetworkInterface.m"
-            timestampString = "516050614.639116"
+            timestampString = "516242448.960818"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
             landmarkName = "rokuRemoteCURLWriteCallback()"
             landmarkType = "9">
          </BreakpointContent>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RokuRemote/RokuRemoteNetworkInterface.m"
-            timestampString = "516050614.639116"
+            timestampString = "516242448.960818"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "-sendRokuCommand:"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "-sendRokuRequest:channelID:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,29 +41,61 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RokuRemote/RokuRemoteNetworkInterface.m"
-            timestampString = "516050614.639116"
+            filePath = "RokuRemote/RokuRemoteChannelViewController.m"
+            timestampString = "516244394.364662"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "-sendRokuCommand:"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
+            landmarkName = "-networkInterface:receivedData:forRequest:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RokuRemote/RokuRemoteNetworkInterface.m"
-            timestampString = "516066449.787939"
+            filePath = "RokuRemote/RokuRemoteChannelViewController.m"
+            timestampString = "516243881.671666"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "-sendRokuCommand:"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "-tableView:objectValueForTableColumn:row:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RokuRemote/RokuRemoteChannelViewController.m"
+            timestampString = "516243881.671666"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "-tableView:objectValueForTableColumn:row:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RokuRemote/RokuRemoteChannelViewController.m"
+            timestampString = "516244394.364662"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "-networkInterface:receivedData:forChannel:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

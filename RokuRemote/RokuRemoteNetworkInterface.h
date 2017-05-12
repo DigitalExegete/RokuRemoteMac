@@ -10,36 +10,46 @@
 
 typedef NS_ENUM(NSUInteger, RokuRemoteControlActions) {
 	
-	Left,
-	Right,
-	Up,
-	Down,
-	Play,
-	Asterisk,
-	Back,
-	Home,
-	Quickback,
-	Enter
+	RokuRemoteLeft,
+	RokuRemoteRight,
+	RokuRemoteUp,
+	RokuRemoteDown,
+	RokuRemotePlay,
+	RokuRemoteAsterisk,
+	RokuRemoteBack,
+	RokuRemoteHome,
+	RokuRemoteQuickback,
+	RokuRemoteEnter,
+	RokuRemoteOkay
 	
 };
 
-//enum RemoteControlActions {
-//case Left
-//case Right
-//case Up
-//case Down
-//case Play
-//case Asterisk
-//case Back
-//case Home
-//case QuickBack
-//}
+typedef NS_ENUM(NSInteger, RokuRemoteRequest)
+{
+	RokuRemoteRequestActiveApp,
+	RokuRemoteRequestChannelListing,
+	RokuRemoteRequestChannelIcon
+};
 
+@class RokuRemoteNetworkInterface;
 
-@interface RokuRemoteNetworkInterface : NSObject<NSURLSessionDelegate, NSURLSessionDataDelegate, NSURLSessionTaskDelegate>
+@protocol RokuRemoteNetworkInterfaceDelegate<NSObject>
 
-- (NSInteger)sendRokuCommand:(RokuRemoteControlActions)action;
-- (void)configureSession;
+@optional
+- (void)networkInterface:(RokuRemoteNetworkInterface *)networkInterface receivedData:(NSData *)data forRequest:(RokuRemoteRequest)remoteRequest;
 
+- (void)networkInterface:(RokuRemoteNetworkInterface *)networkInterface receivedData:(NSData *)data forChannel:(NSUInteger)rokuChannelID;
 
 @end
+
+@interface RokuRemoteNetworkInterface : NSObject<NSURLSessionDelegate, NSURLSessionDataDelegate, NSURLSessionTaskDelegate, RokuRemoteNetworkInterfaceDelegate>
+
+@property (weak) id<RokuRemoteNetworkInterfaceDelegate> remoteDelegate;
+
+- (NSInteger)sendRokuCommand:(RokuRemoteControlActions)action;
+- (void)sendRokuKeypressCommand:(RokuRemoteControlActions)action;
+- (void)sendRokuRequest:(RokuRemoteRequest)request channelID:(NSInteger)channelID;
+- (void)configureSession;
+
+@end
+
