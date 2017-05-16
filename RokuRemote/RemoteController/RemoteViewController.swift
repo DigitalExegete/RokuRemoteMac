@@ -10,11 +10,14 @@ import Cocoa
 
 @objc class RemoteViewController: NSViewController, URLSessionDelegate, NSTableViewDelegate, NSTableViewDataSource, NSPopoverDelegate, RokuRemoteNetworkInterfaceDelegate {
 	
+	let collapsedViewWidth: CGFloat = 289
+	let expandedViewWidth: CGFloat = 530
 	var deviceModel: RokuDeviceModel?
 	@IBOutlet var channelButton: NSButton?
 	@IBOutlet var channelPopover: NSPopover?
 	@IBOutlet var currentChannelImageView: NSImageView?
 	@IBOutlet var deviceTableView: NSTableView?
+	@IBOutlet var rokuRemoteViewWidth: NSLayoutConstraint?
 	var currentChannelImage: NSImage?
 
 	
@@ -35,6 +38,11 @@ import Cocoa
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		
+		rokuRemoteViewWidth?.animator().constant = UserDefaults.standard.bool(forKey: "remoteExpanded") ? self.expandedViewWidth : self.collapsedViewWidth
+
+		
 		NotificationCenter.default.addObserver(forName: Notification.Name.NSTableViewSelectionDidChange, object: self.deviceTableView, queue: nil) { (note: Notification) in
 			
 			if let deviceTableCellView: RokuTableCellView = self.deviceTableView?.view(atColumn: 0, row: (self.deviceTableView?.selectedRow)!, makeIfNecessary: false) as? RokuTableCellView {
@@ -45,6 +53,12 @@ import Cocoa
 			
 			
 		}
+	}
+	
+	@IBAction func expandButtonClicked(sender: NSButton?) {
+		
+		rokuRemoteViewWidth?.animator().constant = (sender?.state==NSOnState) ? self.expandedViewWidth : self.collapsedViewWidth
+		
 	}
 	
 	@IBAction func remoteButtonClicked(sender: RokuPushButton?) {

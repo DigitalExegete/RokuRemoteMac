@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -727,21 +728,30 @@
                                     <action selector="remoteButtonClickedWithSender:" target="kzJ-m7-8CF" id="zqF-26-dti"/>
                                 </connections>
                             </button>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oti-L7-Hkm" customClass="RokuRemoteCrosshairView">
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="oti-L7-Hkm" customClass="RokuRemoteCrosshairView">
                                 <rect key="frame" x="23" y="200" width="250" height="250"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="oti-L7-Hkm" secondAttribute="height" multiplier="1:1" id="3YQ-M6-nEp"/>
+                                    <constraint firstAttribute="height" constant="250" id="SKl-j0-vSF"/>
+                                    <constraint firstAttribute="width" constant="250" id="hkf-nY-gvr"/>
+                                </constraints>
                             </customView>
-                            <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SQV-c6-Gyb">
+                            <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SQV-c6-Gyb">
                                 <rect key="frame" x="97" y="17" width="102" height="102"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="SQV-c6-Gyb" secondAttribute="height" multiplier="1:1" id="VCB-c4-Exj"/>
+                                    <constraint firstAttribute="width" constant="96" id="wvo-9a-Udc"/>
+                                </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="Sis-V2-kKU"/>
                                 <connections>
                                     <binding destination="Wgw-Ag-Z20" name="value" keyPath="self.currentDevice.currentChannel.channelImage" id="4V4-9I-bqq"/>
                                 </connections>
                             </imageView>
-                            <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ywn-RH-uUq">
-                                <rect key="frame" x="75" y="124" width="143" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ywn-RH-uUq">
+                                <rect key="frame" x="81" y="124" width="138" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="134" id="Oil-kb-6A0"/>
+                                </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="iba-L4-amp">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -751,9 +761,8 @@
                                     <binding destination="Wgw-Ag-Z20" name="value" keyPath="self.currentDevice.currentChannel.channelName" id="HSY-FH-cGr"/>
                                 </connections>
                             </textField>
-                            <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K75-3A-pgy">
+                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K75-3A-pgy">
                                 <rect key="frame" x="83" y="147" width="134" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="hIQ-fg-vaH">
                                     <font key="font" metaFont="system"/>
                                     <segments>
@@ -772,10 +781,9 @@
                                     <action selector="remoteTransportClickWithSender:" target="kzJ-m7-8CF" id="tc8-P5-7Kz"/>
                                 </connections>
                             </segmentedControl>
-                            <scrollView wantsLayer="YES" fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzp-PZ-kiz" customClass="RokuChannelScrollView">
+                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzp-PZ-kiz" customClass="RokuChannelScrollView">
                                 <rect key="frame" x="289" y="20" width="221" height="464"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <clipView key="contentView" wantsLayer="YES" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="lJ9-6e-vJM" customClass="RokuClipView">
+                                <clipView key="contentView" wantsLayer="YES" drawsBackground="NO" copiesOnScroll="NO" id="lJ9-6e-vJM" customClass="RokuClipView">
                                     <rect key="frame" x="0.0" y="0.0" width="221" height="464"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -860,6 +868,9 @@
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </clipView>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="221" id="NkR-ks-H9O"/>
+                                </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="R9S-fh-950">
                                     <rect key="frame" x="0.0" y="-16" width="0.0" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
@@ -879,9 +890,11 @@
                                     <action selector="channelButtonClickedWithSender:" target="kzJ-m7-8CF" id="RGs-FD-Wvp"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l9V-kQ-eJ6" customClass="RokuPushButton">
-                                <rect key="frame" x="150" y="169" width="62" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="l9V-kQ-eJ6" customClass="RokuPushButton">
+                                <rect key="frame" x="151" y="169" width="71" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="59" id="mzm-Bu-cuJ"/>
+                                </constraints>
                                 <buttonCell key="cell" type="push" bezelStyle="rounded" image="Asterisk" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4c8-r3-mjI">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -895,9 +908,11 @@
                                     <action selector="remoteButtonClickedWithSender:" target="kzJ-m7-8CF" id="pAR-OX-3vd"/>
                                 </connections>
                             </button>
-                            <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S02-He-8eb" customClass="RokuPushButton">
-                                <rect key="frame" x="83" y="169" width="62" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <button wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S02-He-8eb" customClass="RokuPushButton">
+                                <rect key="frame" x="77" y="169" width="71" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="59" id="0fy-Nh-Lb7"/>
+                                </constraints>
                                 <buttonCell key="cell" type="push" bezelStyle="rounded" image="undo-icon-75426" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="a4u-MI-2Gv">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -911,16 +926,46 @@
                                     <action selector="remoteButtonClickedWithSender:" target="kzJ-m7-8CF" id="ioD-tr-PJl"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jN7-MY-UIo">
+                                <rect key="frame" x="247" y="13" width="40" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSGoRightTemplate" imagePosition="only" alignment="center" alternateImage="NSGoLeftTemplate" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6c2-wO-M2M">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="expandButtonClickedWithSender:" target="kzJ-m7-8CF" id="TjK-46-xE8"/>
+                                    <binding destination="XFf-sb-R0Y" name="value" keyPath="values.remoteExpanded" id="2I6-kk-xiE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="9Bl-Hc-qyg" firstAttribute="leading" secondItem="sJ2-U9-Ryx" secondAttribute="trailing" constant="30" id="0f7-i2-SI7"/>
                             <constraint firstItem="sJ2-U9-Ryx" firstAttribute="top" secondItem="42U-2i-cW8" secondAttribute="top" constant="32" id="0sm-Nt-IlC"/>
+                            <constraint firstItem="Ywn-RH-uUq" firstAttribute="top" secondItem="K75-3A-pgy" secondAttribute="bottom" constant="8" id="5cC-DE-q7E"/>
+                            <constraint firstItem="l9V-kQ-eJ6" firstAttribute="leading" secondItem="S02-He-8eb" secondAttribute="trailing" constant="15" id="9Xn-us-z5E"/>
+                            <constraint firstItem="l9V-kQ-eJ6" firstAttribute="centerY" secondItem="S02-He-8eb" secondAttribute="centerY" id="C0g-NG-PKl"/>
+                            <constraint firstItem="K75-3A-pgy" firstAttribute="top" secondItem="S02-He-8eb" secondAttribute="bottom" constant="5" id="DZK-SH-oHg"/>
+                            <constraint firstItem="SQV-c6-Gyb" firstAttribute="top" secondItem="Ywn-RH-uUq" secondAttribute="bottom" constant="8" id="GkQ-6a-0IW"/>
                             <constraint firstItem="mSP-ry-ObB" firstAttribute="top" secondItem="42U-2i-cW8" secondAttribute="top" constant="32" id="Kc2-ba-5Yc"/>
+                            <constraint firstItem="oti-L7-Hkm" firstAttribute="top" secondItem="9Bl-Hc-qyg" secondAttribute="bottom" constant="13" id="Khz-4r-njG"/>
                             <constraint firstItem="sJ2-U9-Ryx" firstAttribute="leading" secondItem="42U-2i-cW8" secondAttribute="leading" constant="16" id="SRb-tn-XeB"/>
+                            <constraint firstItem="qzp-PZ-kiz" firstAttribute="top" secondItem="42U-2i-cW8" secondAttribute="top" constant="32" id="Sf3-ss-JyF"/>
                             <constraint firstItem="9Bl-Hc-qyg" firstAttribute="top" secondItem="42U-2i-cW8" secondAttribute="top" constant="32" id="VLr-yC-fpu"/>
                             <constraint firstItem="9Bl-Hc-qyg" firstAttribute="width" secondItem="sJ2-U9-Ryx" secondAttribute="width" id="Xsk-gt-eOu"/>
                             <constraint firstItem="mSP-ry-ObB" firstAttribute="width" secondItem="sJ2-U9-Ryx" secondAttribute="width" id="Zj5-gP-wxT"/>
+                            <constraint firstAttribute="width" constant="530" id="ewY-QD-MNO"/>
+                            <constraint firstItem="Ywn-RH-uUq" firstAttribute="leading" secondItem="42U-2i-cW8" secondAttribute="leading" constant="83" id="fvc-5C-UEu"/>
+                            <constraint firstItem="S02-He-8eb" firstAttribute="leading" secondItem="42U-2i-cW8" secondAttribute="leading" constant="83" id="hO2-JE-84I"/>
                             <constraint firstItem="mSP-ry-ObB" firstAttribute="leading" secondItem="9Bl-Hc-qyg" secondAttribute="trailing" constant="31" id="khs-Mm-4Zv"/>
+                            <constraint firstItem="qzp-PZ-kiz" firstAttribute="leading" secondItem="mSP-ry-ObB" secondAttribute="trailing" constant="14" id="mGQ-qM-Lgg"/>
+                            <constraint firstAttribute="bottom" secondItem="qzp-PZ-kiz" secondAttribute="bottom" constant="20" id="mXO-dS-x3b"/>
+                            <constraint firstItem="K75-3A-pgy" firstAttribute="leading" secondItem="42U-2i-cW8" secondAttribute="leading" constant="83" id="nyM-Tw-mjz"/>
+                            <constraint firstItem="S02-He-8eb" firstAttribute="top" secondItem="oti-L7-Hkm" secondAttribute="bottom" constant="3" id="o4P-mU-1Ke"/>
+                            <constraint firstItem="SQV-c6-Gyb" firstAttribute="leading" secondItem="42U-2i-cW8" secondAttribute="leading" constant="100" id="oCP-mh-7qY"/>
+                            <constraint firstAttribute="bottom" secondItem="SQV-c6-Gyb" secondAttribute="bottom" constant="20" id="p2y-zg-XOT"/>
+                            <constraint firstItem="l9V-kQ-eJ6" firstAttribute="width" secondItem="S02-He-8eb" secondAttribute="width" id="r83-Hq-8Ak"/>
+                            <constraint firstItem="oti-L7-Hkm" firstAttribute="leading" secondItem="42U-2i-cW8" secondAttribute="leading" constant="23" id="ye0-or-1nb"/>
                         </constraints>
                     </visualEffectView>
                 </subviews>
@@ -939,6 +984,7 @@
                 <outlet property="channelPopover" destination="3b6-Op-bKh" id="Kzx-57-f2H"/>
                 <outlet property="currentChannelImageView" destination="SQV-c6-Gyb" id="vdj-XF-TNg"/>
                 <outlet property="deviceTableView" destination="oM9-Li-McF" id="0js-1g-tKN"/>
+                <outlet property="rokuRemoteViewWidth" destination="ewY-QD-MNO" id="Shb-OA-JjV"/>
                 <outlet property="view" destination="EiT-Mj-1SZ" id="QxD-P9-73L"/>
             </connections>
         </viewController>
@@ -994,6 +1040,8 @@
     <resources>
         <image name="Asterisk" width="26" height="24"/>
         <image name="Channels" width="14" height="10"/>
+        <image name="NSGoLeftTemplate" width="9" height="12"/>
+        <image name="NSGoRightTemplate" width="9" height="12"/>
         <image name="NSHomeTemplate" width="14" height="14"/>
         <image name="NSInfo" width="32" height="32"/>
         <image name="NSLeftFacingTriangleTemplate" width="9" height="12"/>

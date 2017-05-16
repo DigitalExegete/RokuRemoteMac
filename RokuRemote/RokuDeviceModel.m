@@ -134,12 +134,20 @@
 - (void)networkInterface:(RokuRemoteNetworkInterface *)networkInterface receivedData:(NSData *)data forRequest:(RokuRemoteRequest)remoteRequest
 {
 	
+	if (!data)
+	{
+		return;
+	}
+	
 	switch (remoteRequest)
 	{
 		case RokuRemoteRequestChannelListing:
 		{
-			NSXMLDocument *channelListingDocument = [[NSXMLDocument alloc] initWithData:data options:0 error:nil];
-			[self processRokuChannels:channelListingDocument.rootElement];
+			if (data)
+			{
+				NSXMLDocument *channelListingDocument = [[NSXMLDocument alloc] initWithData:data options:0 error:nil];
+				[self processRokuChannels:channelListingDocument.rootElement];
+			}
 		}
 			break;
 		case RokuRemoteRequestActiveApp:
