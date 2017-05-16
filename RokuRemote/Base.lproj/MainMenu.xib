@@ -694,7 +694,7 @@
                     <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="behindWindow" material="titlebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="42U-2i-cW8">
                         <rect key="frame" x="0.0" y="0.0" width="530" height="516"/>
                         <subviews>
-                            <button wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sJ2-U9-Ryx">
+                            <button wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sJ2-U9-Ryx" customClass="RokuPushButton">
                                 <rect key="frame" x="10" y="456" width="78" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="66" id="0WS-D2-beo"/>
@@ -703,15 +703,38 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="buttonAction">
+                                        <integer key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="remoteButtonClickedWithSender:" target="kzJ-m7-8CF" id="brc-gm-2Lp"/>
+                                </connections>
+                            </button>
+                            <button identifier="home" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mSP-ry-ObB" customClass="RokuPushButton">
+                                <rect key="frame" x="203" y="456" width="78" height="32"/>
+                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSHomeTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YcA-ge-cy0">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="buttonAction">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="remoteButtonClickedWithSender:" target="kzJ-m7-8CF" id="zqF-26-dti"/>
+                                </connections>
                             </button>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oti-L7-Hkm" customClass="RokuRemoteCrosshairView">
                                 <rect key="frame" x="23" y="200" width="250" height="250"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </customView>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SQV-c6-Gyb">
+                            <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SQV-c6-Gyb">
                                 <rect key="frame" x="97" y="17" width="102" height="102"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="Sis-V2-kKU"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="Sis-V2-kKU"/>
                                 <connections>
                                     <binding destination="Wgw-Ag-Z20" name="value" keyPath="self.currentDevice.currentChannel.channelImage" id="4V4-9I-bqq"/>
                                 </connections>
@@ -729,16 +752,25 @@
                                 </connections>
                             </textField>
                             <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K75-3A-pgy">
-                                <rect key="frame" x="89" y="168" width="115" height="25"/>
+                                <rect key="frame" x="83" y="147" width="134" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="hIQ-fg-vaH">
                                     <font key="font" metaFont="system"/>
                                     <segments>
-                                        <segment label="&lt;&lt;"/>
-                                        <segment label="|&gt;" tag="1"/>
-                                        <segment label="&gt;&gt;"/>
+                                        <segment image="transport_rewind" tag="11">
+                                            <nil key="label"/>
+                                        </segment>
+                                        <segment image="transport_play" tag="4">
+                                            <nil key="label"/>
+                                        </segment>
+                                        <segment image="transport_forward" tag="12">
+                                            <nil key="label"/>
+                                        </segment>
                                     </segments>
                                 </segmentedCell>
+                                <connections>
+                                    <action selector="remoteTransportClickWithSender:" target="kzJ-m7-8CF" id="tc8-P5-7Kz"/>
+                                </connections>
                             </segmentedControl>
                             <scrollView wantsLayer="YES" fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzp-PZ-kiz" customClass="RokuChannelScrollView">
                                 <rect key="frame" x="289" y="20" width="221" height="464"/>
@@ -747,7 +779,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="221" height="464"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView wantsLayer="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" id="oM9-Li-McF">
+                                        <tableView wantsLayer="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" id="oM9-Li-McF">
                                             <rect key="frame" x="0.0" y="0.0" width="221" height="464"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -847,12 +879,37 @@
                                     <action selector="channelButtonClickedWithSender:" target="kzJ-m7-8CF" id="RGs-FD-Wvp"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mSP-ry-ObB">
-                                <rect key="frame" x="203" y="456" width="78" height="32"/>
-                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSHomeTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YcA-ge-cy0">
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l9V-kQ-eJ6" customClass="RokuPushButton">
+                                <rect key="frame" x="150" y="169" width="62" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="Asterisk" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4c8-r3-mjI">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="buttonAction">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="remoteButtonClickedWithSender:" target="kzJ-m7-8CF" id="pAR-OX-3vd"/>
+                                </connections>
+                            </button>
+                            <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S02-He-8eb" customClass="RokuPushButton">
+                                <rect key="frame" x="83" y="169" width="62" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="undo-icon-75426" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="a4u-MI-2Gv">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="buttonAction">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="remoteButtonClickedWithSender:" target="kzJ-m7-8CF" id="ioD-tr-PJl"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>
@@ -935,9 +992,14 @@
         <arrayController id="gSq-du-7Gd"/>
     </objects>
     <resources>
+        <image name="Asterisk" width="26" height="24"/>
         <image name="Channels" width="14" height="10"/>
         <image name="NSHomeTemplate" width="14" height="14"/>
         <image name="NSInfo" width="32" height="32"/>
         <image name="NSLeftFacingTriangleTemplate" width="9" height="12"/>
+        <image name="transport_forward" width="26" height="24"/>
+        <image name="transport_play" width="26" height="24"/>
+        <image name="transport_rewind" width="26" height="24"/>
+        <image name="undo-icon-75426" width="32" height="32"/>
     </resources>
 </document>

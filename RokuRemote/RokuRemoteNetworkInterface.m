@@ -89,6 +89,27 @@ typedef BOOL (^BlockType)(NSDocument *, NSWindow *);
 		case RokuRemoteDown:
 			pathComponent = @"keypress/down";
 			break;
+		case RokuRemoteBack:
+			pathComponent = @"keypress/back";
+			break;
+		case RokuRemoteHome:
+			pathComponent = @"keypress/home";
+			break;
+		case RokuRemotePlay:
+			pathComponent = @"keypress/play";
+			break;
+		case RokuRemoteRev:
+			pathComponent = @"keypress/rev";
+			break;
+		case RokuRemoteFwd:
+			pathComponent = @"keypress/fwd";
+			break;
+		case RokuRemoteAsterisk:
+			pathComponent = @"keypress/info";
+			break;
+		case RokuRemoteQuickback:
+			pathComponent = @"keypress/instantreplay";
+			break;
 		default:
 			break;
 			

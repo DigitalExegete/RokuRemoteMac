@@ -47,9 +47,23 @@ import Cocoa
 		}
 	}
 	
-	@IBAction func remoteButtonClicked(sender: Any?) {
+	@IBAction func remoteButtonClicked(sender: RokuPushButton?) {
 		
+		let realAction: RokuRemoteControlActions = RokuRemoteControlActions.init(rawValue: (sender?.buttonAction)!)!
+		let currentDevice = self.deviceModel
+		currentDevice?.sendRokuKeypressCommand(realAction)
+
+	}
+	
+	@IBAction func remoteTransportClick(sender: NSSegmentedControl? ) {
 		
+		let segCell: NSSegmentedCell? = sender?.cell as! NSSegmentedCell?
+		 //(forSegment:UInt((sender?.selectedSegment))
+		
+		let realAction: RokuRemoteControlActions = RokuRemoteControlActions.init(rawValue: UInt((segCell?.tag(forSegment: (sender?.selectedSegment)!))!))!
+		let currentDevice = self.deviceModel
+		currentDevice?.sendRokuKeypressCommand(realAction)
+
 		
 	}
 	

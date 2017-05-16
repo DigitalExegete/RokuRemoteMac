@@ -10,7 +10,7 @@
 
 typedef NS_ENUM(NSUInteger, RokuRemoteControlActions) {
 	
-	RokuRemoteLeft,
+	RokuRemoteLeft=0,
 	RokuRemoteRight,
 	RokuRemoteUp,
 	RokuRemoteDown,
@@ -20,7 +20,9 @@ typedef NS_ENUM(NSUInteger, RokuRemoteControlActions) {
 	RokuRemoteHome,
 	RokuRemoteQuickback,
 	RokuRemoteEnter,
-	RokuRemoteOkay
+	RokuRemoteOkay,
+	RokuRemoteRev,
+	RokuRemoteFwd,
 	
 };
 

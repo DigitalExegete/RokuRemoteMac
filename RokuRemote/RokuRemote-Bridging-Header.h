@@ -6,4 +6,5 @@
 #import "RokuDeviceModel.h"
 #import "RokuDeviceEnumerator.h"
 #import "RokuTableCellView.h"
+#import "RokuPushButton.h"
 #include <curl/curl.h>
