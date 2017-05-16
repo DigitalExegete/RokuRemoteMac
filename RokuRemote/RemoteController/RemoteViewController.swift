@@ -19,7 +19,8 @@ import Cocoa
 	@IBOutlet var deviceTableView: NSTableView?
 	@IBOutlet var rokuRemoteViewWidth: NSLayoutConstraint?
 	var currentChannelImage: NSImage?
-
+	var moreButtonImage: NSImage?
+	@IBOutlet var expandButton: NSButton?
 	
 	
 	required init?(coder: NSCoder) {
@@ -39,6 +40,7 @@ import Cocoa
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		self.expandButton?.image = UserDefaults.standard.bool(forKey: "remoteExpanded") ? NSImage(named: NSImageNameGoLeftTemplate) : NSImage(named: NSImageNameGoRightTemplate)
 		
 		rokuRemoteViewWidth?.animator().constant = UserDefaults.standard.bool(forKey: "remoteExpanded") ? self.expandedViewWidth : self.collapsedViewWidth
 
@@ -58,7 +60,8 @@ import Cocoa
 	@IBAction func expandButtonClicked(sender: NSButton?) {
 		
 		rokuRemoteViewWidth?.animator().constant = (sender?.state==NSOnState) ? self.expandedViewWidth : self.collapsedViewWidth
-		
+		self.expandButton?.animator().image = (sender?.state==NSOnState) ? NSImage(named: NSImageNameGoLeftTemplate) : NSImage(named: NSImageNameGoRightTemplate)
+
 	}
 	
 	@IBAction func remoteButtonClicked(sender: RokuPushButton?) {

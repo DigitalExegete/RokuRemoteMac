@@ -927,9 +927,9 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jN7-MY-UIo">
-                                <rect key="frame" x="247" y="13" width="40" height="32"/>
+                                <rect key="frame" x="247" y="18" width="28" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSGoRightTemplate" imagePosition="only" alignment="center" alternateImage="NSGoLeftTemplate" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6c2-wO-M2M">
+                                <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSGoRightTemplate" imagePosition="only" alignment="center" alternateImage="NSGoLeftTemplate" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6c2-wO-M2M">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -984,6 +984,7 @@
                 <outlet property="channelPopover" destination="3b6-Op-bKh" id="Kzx-57-f2H"/>
                 <outlet property="currentChannelImageView" destination="SQV-c6-Gyb" id="vdj-XF-TNg"/>
                 <outlet property="deviceTableView" destination="oM9-Li-McF" id="0js-1g-tKN"/>
+                <outlet property="expandButton" destination="jN7-MY-UIo" id="yd7-o1-r0T"/>
                 <outlet property="rokuRemoteViewWidth" destination="ewY-QD-MNO" id="Shb-OA-JjV"/>
                 <outlet property="view" destination="EiT-Mj-1SZ" id="QxD-P9-73L"/>
             </connections>
