@@ -685,47 +685,76 @@
         <window title="RokuRemote" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" texturedBackground="YES" fullSizeContentView="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="293" height="516"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+            <rect key="contentRect" x="335" y="390" width="530" height="516"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="293" height="516"/>
+                <rect key="frame" x="0.0" y="0.0" width="530" height="516"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" fixedFrame="YES" blendingMode="behindWindow" material="titlebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="42U-2i-cW8">
-                        <rect key="frame" x="0.0" y="0.0" width="293" height="516"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="behindWindow" material="titlebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="42U-2i-cW8">
+                        <rect key="frame" x="0.0" y="0.0" width="530" height="516"/>
                         <subviews>
-                            <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sJ2-U9-Ryx">
-                                <rect key="frame" x="17" y="456" width="57" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="&lt;=" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nEb-sP-MBx">
+                            <button wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sJ2-U9-Ryx">
+                                <rect key="frame" x="10" y="456" width="78" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="66" id="0WS-D2-beo"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSLeftFacingTriangleTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nEb-sP-MBx">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mSP-ry-ObB">
-                                <rect key="frame" x="200" y="456" width="79" height="32"/>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oti-L7-Hkm" customClass="RokuRemoteCrosshairView">
+                                <rect key="frame" x="23" y="200" width="250" height="250"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="HOME" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YcA-ge-cy0">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            </customView>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SQV-c6-Gyb">
+                                <rect key="frame" x="97" y="17" width="102" height="102"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="Sis-V2-kKU"/>
+                                <connections>
+                                    <binding destination="Wgw-Ag-Z20" name="value" keyPath="self.currentDevice.currentChannel.channelImage" id="4V4-9I-bqq"/>
+                                </connections>
+                            </imageView>
+                            <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ywn-RH-uUq">
+                                <rect key="frame" x="75" y="124" width="143" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="iba-L4-amp">
                                     <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
-                            <scrollView hidden="YES" fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzp-PZ-kiz">
-                                <rect key="frame" x="16" y="11" width="265" height="19"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="Wgw-Ag-Z20" name="value" keyPath="self.currentDevice.currentChannel.channelName" id="HSY-FH-cGr"/>
+                                </connections>
+                            </textField>
+                            <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K75-3A-pgy">
+                                <rect key="frame" x="89" y="168" width="115" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="lJ9-6e-vJM">
-                                    <rect key="frame" x="0.0" y="0.0" width="265" height="19"/>
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="hIQ-fg-vaH">
+                                    <font key="font" metaFont="system"/>
+                                    <segments>
+                                        <segment label="&lt;&lt;"/>
+                                        <segment label="|&gt;" tag="1"/>
+                                        <segment label="&gt;&gt;"/>
+                                    </segments>
+                                </segmentedCell>
+                            </segmentedControl>
+                            <scrollView wantsLayer="YES" fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzp-PZ-kiz" customClass="RokuChannelScrollView">
+                                <rect key="frame" x="289" y="20" width="221" height="464"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <clipView key="contentView" wantsLayer="YES" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="lJ9-6e-vJM" customClass="RokuClipView">
+                                    <rect key="frame" x="0.0" y="0.0" width="221" height="464"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="oM9-Li-McF">
-                                            <rect key="frame" x="0.0" y="0.0" width="265" height="19"/>
+                                        <tableView wantsLayer="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" id="oM9-Li-McF">
+                                            <rect key="frame" x="0.0" y="0.0" width="221" height="464"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="rokuChannelName" editable="NO" width="116" minWidth="40" maxWidth="1000" id="kGr-4d-fxL">
+                                                <tableColumn identifier="rokuDeviceColumn" editable="NO" width="218" minWidth="40" maxWidth="1000" id="kGr-4d-fxL">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -737,69 +766,63 @@
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="aAy-3k-j9P">
-                                                            <rect key="frame" x="1" y="1" width="116" height="17"/>
+                                                        <tableCellView identifier="rokuDeviceCell" wantsLayer="YES" id="aAy-3k-j9P" customClass="RokuTableCellView">
+                                                            <rect key="frame" x="1" y="1" width="218" height="60"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LHf-5w-7nN">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="116" height="17"/>
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LHf-5w-7nN" customClass="RokuRemoteChannelTextField">
+                                                                    <rect key="frame" x="71" y="43" width="147" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="go4-1H-sxV">
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Name" id="go4-1H-sxV">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <binding destination="aAy-3k-j9P" name="value" keyPath="objectValue" id="s8C-9v-wwJ"/>
+                                                                        <binding destination="aAy-3k-j9P" name="value" keyPath="objectValue.deviceName" id="gCr-dL-v4a"/>
                                                                     </connections>
                                                                 </textField>
-                                                            </subviews>
-                                                            <connections>
-                                                                <outlet property="textField" destination="LHf-5w-7nN" id="CmR-l4-ncr"/>
-                                                            </connections>
-                                                        </tableCellView>
-                                                    </prototypeCellViews>
-                                                </tableColumn>
-                                                <tableColumn width="143" minWidth="40" maxWidth="1000" id="SJw-83-BHP">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="smallSystem"/>
-                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
-                                                    </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="lve-q5-GOJ">
-                                                        <font key="font" metaFont="system"/>
-                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                    <prototypeCellViews>
-                                                        <tableCellView id="Zc6-89-LiG">
-                                                            <rect key="frame" x="120" y="1" width="143" height="17"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pYB-Oy-ney">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="143" height="17"/>
+                                                                <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hT3-K3-Uke">
+                                                                    <rect key="frame" x="3" y="6" width="62" height="48"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSInfo" id="nD8-qO-lFL"/>
+                                                                </imageView>
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bP9-8K-Wpg" customClass="RokuRemoteChannelTextField">
+                                                                    <rect key="frame" x="71" y="24" width="147" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="G9N-QB-A4w">
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Model" id="pYq-82-ALh">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <binding destination="Zc6-89-LiG" name="value" keyPath="objectValue" id="eaL-Xi-1Hy"/>
+                                                                        <binding destination="aAy-3k-j9P" name="value" keyPath="objectValue.modelNumber" id="shh-VO-94K"/>
+                                                                    </connections>
+                                                                </textField>
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cwk-xr-TF5" customClass="RokuRemoteChannelTextField">
+                                                                    <rect key="frame" x="71" y="6" width="147" height="17"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="IP Address" id="Znq-2D-qOR">
+                                                                        <font key="font" metaFont="system"/>
+                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                    <connections>
+                                                                        <binding destination="aAy-3k-j9P" name="value" keyPath="objectValue.ipAddress" id="GvK-7J-gkm"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <connections>
-                                                                <outlet property="textField" destination="pYB-Oy-ney" id="Qu1-7P-dMc"/>
+                                                                <outlet property="imageView" destination="hT3-K3-Uke" id="zac-Jh-NTt"/>
+                                                                <outlet property="textField" destination="LHf-5w-7nN" id="CmR-l4-ncr"/>
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
-                                                <outlet property="dataSource" destination="Wgw-Ag-Z20" id="1wS-BF-kBh"/>
-                                                <outlet property="delegate" destination="Wgw-Ag-Z20" id="xYy-si-Pdd"/>
+                                                <outlet property="dataSource" destination="Wgw-Ag-Z20" id="xNQ-d4-W8N"/>
+                                                <outlet property="delegate" destination="Wgw-Ag-Z20" id="9aC-uS-Y18"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
@@ -814,62 +837,51 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oti-L7-Hkm" customClass="RokuRemoteCrosshairView">
-                                <rect key="frame" x="23" y="200" width="250" height="250"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </customView>
-                            <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K75-3A-pgy">
-                                <rect key="frame" x="91" y="162" width="115" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="hIQ-fg-vaH">
+                            <button wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Bl-Hc-qyg">
+                                <rect key="frame" x="106" y="456" width="78" height="32"/>
+                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="Channels" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="w5s-hg-lzo">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
-                                    <segments>
-                                        <segment label="&lt;&lt;"/>
-                                        <segment label="|&gt;" tag="1"/>
-                                        <segment label="&gt;&gt;"/>
-                                    </segments>
-                                </segmentedCell>
-                            </segmentedControl>
-                            <scrollView wantsLayer="YES" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lA6-D3-Nhh">
-                                <rect key="frame" x="16" y="11" width="265" height="145"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="U26-m4-0yD">
-                                    <rect key="frame" x="1" y="1" width="263" height="143"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <collectionView ambiguous="YES" selectable="YES" id="JnP-4B-5iJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="263" height="143"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="4" minimumLineSpacing="4" id="lRz-he-jPe">
-                                                <size key="itemSize" width="84" height="84"/>
-                                            </collectionViewFlowLayout>
-                                            <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="secondaryBackgroundColor" name="controlAlternatingRowColor" catalog="System" colorSpace="catalog"/>
-                                            <connections>
-                                                <outlet property="dataSource" destination="Wgw-Ag-Z20" id="4e9-WS-gMl"/>
-                                                <outlet property="delegate" destination="Wgw-Ag-Z20" id="tYS-Aa-fev"/>
-                                            </connections>
-                                        </collectionView>
-                                    </subviews>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="BPE-nU-IoY">
-                                    <rect key="frame" x="1" y="144" width="233" height="15"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Wiu-0U-4F3">
-                                    <rect key="frame" x="233" y="1" width="16" height="134"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                            </scrollView>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="channelButtonClickedWithSender:" target="kzJ-m7-8CF" id="RGs-FD-Wvp"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mSP-ry-ObB">
+                                <rect key="frame" x="203" y="456" width="78" height="32"/>
+                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSHomeTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YcA-ge-cy0">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="9Bl-Hc-qyg" firstAttribute="leading" secondItem="sJ2-U9-Ryx" secondAttribute="trailing" constant="30" id="0f7-i2-SI7"/>
+                            <constraint firstItem="sJ2-U9-Ryx" firstAttribute="top" secondItem="42U-2i-cW8" secondAttribute="top" constant="32" id="0sm-Nt-IlC"/>
+                            <constraint firstItem="mSP-ry-ObB" firstAttribute="top" secondItem="42U-2i-cW8" secondAttribute="top" constant="32" id="Kc2-ba-5Yc"/>
+                            <constraint firstItem="sJ2-U9-Ryx" firstAttribute="leading" secondItem="42U-2i-cW8" secondAttribute="leading" constant="16" id="SRb-tn-XeB"/>
+                            <constraint firstItem="9Bl-Hc-qyg" firstAttribute="top" secondItem="42U-2i-cW8" secondAttribute="top" constant="32" id="VLr-yC-fpu"/>
+                            <constraint firstItem="9Bl-Hc-qyg" firstAttribute="width" secondItem="sJ2-U9-Ryx" secondAttribute="width" id="Xsk-gt-eOu"/>
+                            <constraint firstItem="mSP-ry-ObB" firstAttribute="width" secondItem="sJ2-U9-Ryx" secondAttribute="width" id="Zj5-gP-wxT"/>
+                            <constraint firstItem="mSP-ry-ObB" firstAttribute="leading" secondItem="9Bl-Hc-qyg" secondAttribute="trailing" constant="31" id="khs-Mm-4Zv"/>
+                        </constraints>
                     </visualEffectView>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="42U-2i-cW8" secondAttribute="trailing" id="23P-Zi-FbL"/>
+                    <constraint firstItem="42U-2i-cW8" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="8YV-Av-vLL"/>
+                    <constraint firstItem="42U-2i-cW8" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="WdE-4i-CGA"/>
+                    <constraint firstAttribute="bottom" secondItem="42U-2i-cW8" secondAttribute="bottom" id="fbL-nE-iw7"/>
+                </constraints>
             </view>
-            <point key="canvasLocation" x="25.5" y="-224"/>
+            <point key="canvasLocation" x="144" y="-224"/>
         </window>
         <viewController id="kzJ-m7-8CF" customClass="RemoteViewController" customModule="RokuRemote" customModuleProvider="target">
             <connections>
+                <outlet property="channelButton" destination="9Bl-Hc-qyg" id="sV1-zO-vdC"/>
+                <outlet property="channelPopover" destination="3b6-Op-bKh" id="Kzx-57-f2H"/>
+                <outlet property="currentChannelImageView" destination="SQV-c6-Gyb" id="vdj-XF-TNg"/>
+                <outlet property="deviceTableView" destination="oM9-Li-McF" id="0js-1g-tKN"/>
                 <outlet property="view" destination="EiT-Mj-1SZ" id="QxD-P9-73L"/>
             </connections>
         </viewController>
@@ -877,8 +889,55 @@
             <connections>
                 <outlet property="channelCollectionView" destination="JnP-4B-5iJ" id="I30-tc-CeK"/>
                 <outlet property="channelTableView" destination="oM9-Li-McF" id="Q9P-2b-T6i"/>
-                <outlet property="view" destination="qzp-PZ-kiz" id="8we-9E-8ff"/>
+                <outlet property="deviceArrayController" destination="gSq-du-7Gd" id="vct-Lw-R6f"/>
+                <outlet property="view" destination="lA6-D3-Nhh" id="1q2-Pa-VD8"/>
             </connections>
         </viewController>
+        <popover appearance="HUD" behavior="semitransient" id="3b6-Op-bKh">
+            <connections>
+                <outlet property="contentViewController" destination="Wgw-Ag-Z20" id="N2J-Cd-SHf"/>
+                <outlet property="delegate" destination="kzJ-m7-8CF" id="t1A-0Y-Uv4"/>
+            </connections>
+        </popover>
+        <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" id="lA6-D3-Nhh" customClass="RokuChannelScrollView">
+            <rect key="frame" x="0.0" y="0.0" width="265" height="145"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="U26-m4-0yD">
+                <rect key="frame" x="0.0" y="0.0" width="265" height="145"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <collectionView selectable="YES" id="JnP-4B-5iJ">
+                        <rect key="frame" x="0.0" y="0.0" width="265" height="145"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="4" minimumLineSpacing="4" id="lRz-he-jPe">
+                            <size key="itemSize" width="84" height="84"/>
+                        </collectionViewFlowLayout>
+                        <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        <connections>
+                            <outlet property="dataSource" destination="Wgw-Ag-Z20" id="4e9-WS-gMl"/>
+                            <outlet property="delegate" destination="Wgw-Ag-Z20" id="tYS-Aa-fev"/>
+                        </connections>
+                    </collectionView>
+                </subviews>
+                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+            </clipView>
+            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="BPE-nU-IoY">
+                <rect key="frame" x="0.0" y="129" width="265" height="16"/>
+                <autoresizingMask key="autoresizingMask"/>
+            </scroller>
+            <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Wiu-0U-4F3">
+                <rect key="frame" x="-100" y="-100" width="16" height="0.0"/>
+                <autoresizingMask key="autoresizingMask"/>
+            </scroller>
+            <point key="canvasLocation" x="26" y="260"/>
+        </scrollView>
+        <userDefaultsController representsSharedInstance="YES" id="XFf-sb-R0Y"/>
+        <arrayController id="gSq-du-7Gd"/>
     </objects>
+    <resources>
+        <image name="Channels" width="14" height="10"/>
+        <image name="NSHomeTemplate" width="14" height="14"/>
+        <image name="NSInfo" width="32" height="32"/>
+        <image name="NSLeftFacingTriangleTemplate" width="9" height="12"/>
+    </resources>
 </document>

@@ -18,11 +18,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
+	
 	CALayer *backgroundLayer = [CALayer new];
 	self.highlightLayer = backgroundLayer;
 	[[self.view layer] addSublayer:backgroundLayer];
 	[self.highlightLayer setFrame:self.view.bounds];
 	self.highlightLayer.backgroundColor = [[NSColor alternateSelectedControlColor] colorWithAlphaComponent:0.25].CGColor;
+	self.highlightLayer.hidden = YES;
+	
 }
 
 - (void)viewDidAppear

@@ -8,13 +8,18 @@
 
 import Cocoa
 
-@objc class RemoteViewController: NSViewController, URLSessionDelegate, NSTableViewDelegate, NSTableViewDataSource {
+@objc class RemoteViewController: NSViewController, URLSessionDelegate, NSTableViewDelegate, NSTableViewDataSource, NSPopoverDelegate, RokuRemoteNetworkInterfaceDelegate {
 	
-	var remoteInterface: RokuRemoteNetworkInterface = RokuRemoteNetworkInterface()
+	var deviceModel: RokuDeviceModel?
+	@IBOutlet var channelButton: NSButton?
+	@IBOutlet var channelPopover: NSPopover?
+	@IBOutlet var currentChannelImageView: NSImageView?
+	@IBOutlet var deviceTableView: NSTableView?
+	var currentChannelImage: NSImage?
+
+	
 	
 	required init?(coder: NSCoder) {
-		
-		remoteInterface.configureSession()
 		super.init(coder: coder)
 	}
 	
@@ -22,9 +27,36 @@ import Cocoa
 
 	}
 	
+	
+	override func viewDidAppear() {
+		super.viewDidAppear()
+		
+	}
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		NotificationCenter.default.addObserver(forName: Notification.Name.NSTableViewSelectionDidChange, object: self.deviceTableView, queue: nil) { (note: Notification) in
+			
+			if let deviceTableCellView: RokuTableCellView = self.deviceTableView?.view(atColumn: 0, row: (self.deviceTableView?.selectedRow)!, makeIfNecessary: false) as? RokuTableCellView {
+			
+				self.deviceModel = deviceTableCellView.objectValue
+			
+			}
+			
+			
+		}
+	}
+	
 	@IBAction func remoteButtonClicked(sender: Any?) {
 		
 		
+		
+	}
+	
+	@IBAction func channelButtonClicked(sender: NSButton?) {
+		
+		self.channelPopover?.delegate = self
+		self.channelPopover?.show(relativeTo: (self.channelButton?.bounds)!, of: sender!, preferredEdge: NSRectEdge.maxY)
 		
 	}
 	
@@ -39,10 +71,27 @@ import Cocoa
 		{
 		
 			let realAction: RokuRemoteControlActions = RokuRemoteControlActions.init(rawValue: (controlAction.uintValue))!
-			remoteInterface.sendRokuKeypressCommand(realAction)
+			let currentDevice = self.deviceModel
+			currentDevice?.sendRokuKeypressCommand(realAction)
 			
 		}
 		
+		
+	}
+	
+	
+	class override func exposedBindings() -> [String] {
+		
+		return ["deviceModel"]
+	
+	}
+	
+	func networkInterface(_ networkInterface: RokuRemoteNetworkInterface!, receivedData data: Data!, forChannel rokuChannelID: UInt) {
+		
+		CATransaction.begin()
+		self.currentChannelImage = NSImage(data: data)
+		self.currentChannelImageView?.image = self.currentChannelImage
+		CATransaction.commit()
 	}
 	
 }

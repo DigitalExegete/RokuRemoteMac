@@ -28,7 +28,8 @@ typedef NS_ENUM(NSInteger, RokuRemoteRequest)
 {
 	RokuRemoteRequestActiveApp,
 	RokuRemoteRequestChannelListing,
-	RokuRemoteRequestChannelIcon
+	RokuRemoteRequestChannelIcon,
+	RokuRemoteRequestDeviceInfo,
 };
 
 @class RokuRemoteNetworkInterface;
@@ -45,6 +46,11 @@ typedef NS_ENUM(NSInteger, RokuRemoteRequest)
 @interface RokuRemoteNetworkInterface : NSObject<NSURLSessionDelegate, NSURLSessionDataDelegate, NSURLSessionTaskDelegate, RokuRemoteNetworkInterfaceDelegate>
 
 @property (weak) id<RokuRemoteNetworkInterfaceDelegate> remoteDelegate;
+@property (copy, readonly) NSString *ipaddress;
+
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithIPAddress:(NSString *)ipaddr NS_DESIGNATED_INITIALIZER;
+
 
 - (NSInteger)sendRokuCommand:(RokuRemoteControlActions)action;
 - (void)sendRokuKeypressCommand:(RokuRemoteControlActions)action;

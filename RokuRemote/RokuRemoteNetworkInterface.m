@@ -8,6 +8,7 @@
 #import <Cocoa/Cocoa.h>
 #import "RokuRemoteNetworkInterface.h"
 #import "RokuRemote-Swift.h"
+#import <CocoaAsyncSocket/CocoaAsyncSocket.h>
 #include <curl/curl.h>
 
 typedef BOOL (^BlockType)(NSDocument *, NSWindow *);
@@ -19,6 +20,7 @@ typedef BOOL (^BlockType)(NSDocument *, NSWindow *);
 @property (strong) NSXMLDocument *postResults;
 @property (strong) NSURLSession *rokuURLSession;
 @property (strong) NSOperationQueue *urlSessionQueue;
+@property (copy, readwrite) NSString *ipaddress;
 
 
 @end
@@ -33,6 +35,18 @@ typedef BOOL (^BlockType)(NSDocument *, NSWindow *);
 	{
 	
 		_transferData = [NSMutableData dataWithLength:16384];
+	}
+	return self;
+	
+}
+
+- (instancetype)initWithIPAddress:(NSString *)ipaddr
+{
+	
+	self = [super init];
+	if (self)
+	{
+		_ipaddress = ipaddr;
 	}
 	return self;
 	
@@ -69,12 +83,18 @@ typedef BOOL (^BlockType)(NSDocument *, NSWindow *);
 		case RokuRemoteRight:
 			pathComponent = @"keypress/right";
 			break;
+		case RokuRemoteUp:
+			pathComponent = @"keypress/up";
+			break;
+		case RokuRemoteDown:
+			pathComponent = @"keypress/down";
+			break;
 		default:
 			break;
 			
 	}
 
-	NSURL *rokuURL = [NSURL URLWithString:@"http://192.168.1.52:8060"];
+	NSURL *rokuURL = [NSURL URLWithString:self.ipaddress];
 	
 	rokuURL = [rokuURL URLByAppendingPathComponent:pathComponent];
 	
@@ -97,12 +117,15 @@ typedef BOOL (^BlockType)(NSDocument *, NSWindow *);
 		case RokuRemoteRequestChannelListing:
 			pathComponent = @"query/apps";
 			break;
+		case RokuRemoteRequestDeviceInfo:
+			pathComponent = @"query/device-info";
+			break;
 		default:
 			break;
 			
 	}
 	
-	NSURL *rokuURL = [NSURL URLWithString:@"http://192.168.1.52:8060"];
+	NSURL *rokuURL = [NSURL URLWithString:self.ipaddress];
 	
 	rokuURL = [rokuURL URLByAppendingPathComponent:pathComponent];
 	

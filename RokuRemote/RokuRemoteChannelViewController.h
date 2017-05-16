@@ -9,6 +9,13 @@
 #import <Cocoa/Cocoa.h>
 #import "RokuRemoteNetworkInterface.h"
 
-@interface RokuRemoteChannelViewController : NSViewController<NSTableViewDataSource, NSTableViewDelegate, RokuRemoteNetworkInterfaceDelegate, NSCollectionViewDataSource, NSCollectionViewDataSource>
+@class RokuDeviceModel;
+
+@interface RokuRemoteChannelViewController : NSViewController<NSTableViewDataSource, NSTableViewDelegate, NSCollectionViewDataSource, NSCollectionViewDataSource>
+
+@property (copy) NSString *activeApp;
+@property (strong) NSImage *activeAppImage;
+@property (assign) NSUInteger activeAppID;
+@property (weak) RokuDeviceModel *currentDevice;
 
 @end

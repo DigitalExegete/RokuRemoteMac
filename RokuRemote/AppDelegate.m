@@ -10,7 +10,7 @@
 #import "RokuRemote-Swift.h"
 #include <curl/curl.h>
 #include "RokuRemoteNetworkInterface.h"
-
+#include "RokuDeviceEnumerator.h"
 @interface AppDelegate ()
 @property (weak) IBOutlet NSWindow *window;
 @property (strong) IBOutlet RemoteViewController *remoteViewController;
@@ -22,13 +22,10 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// Insert code here to initialize your application
 	
-//	[self.window setTitleVisibility:NSWindowTitleHidden];
 	[self.window setTitlebarAppearsTransparent:YES];
 	[self.window setAppearance:[NSAppearance appearanceNamed:NSAppearanceNameVibrantDark]];
-	
-	
-	
-	
+	[[self.window standardWindowButton:NSWindowZoomButton] setHidden:YES];
+	[[self.window standardWindowButton:NSWindowMiniaturizeButton] setHidden:YES];
 	
 }
 

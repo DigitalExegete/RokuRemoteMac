@@ -11,16 +11,21 @@
 #import "RokuRemoteChannelCollectionViewItem.h"
 #import "RokuRemote-Swift.h"
 #import "RokuChannelModel.h"
+#import "RokuDeviceModel.h"
+#import "RokuDeviceEnumerator.h"
+#import "RokuTableCellView.h"
 
 @interface RokuRemoteChannelViewController ()
+
 @property (strong) RokuRemoteNetworkInterface *channelNetworkInterface;
-//@property (strong) NSOperationQueue *channelOperationQueue;
-@property (weak) IBOutlet NSTableView *channelTableView;
+@property (weak) IBOutlet NSTableView *channelTableView; //deviceTableView!
 @property (weak) IBOutlet NSCollectionView *channelCollectionView;
 @property (assign) NSInteger numberOfChannels;
 @property (strong) NSXMLElement *channelsElement;
 @property (assign) BOOL showingCollectionView;
-@property (strong) NSMutableArray<RokuChannelModel *> *rokuChannels;
+@property (weak) RokuDeviceEnumerator *deviceEnumerator;
+@property (strong) IBOutlet NSArrayController *deviceArrayController;
+
 @end
 
 @implementation RokuRemoteChannelViewController
@@ -30,47 +35,116 @@
 	self = [super initWithCoder:coder];
 	if (self)
 	{
-		_channelNetworkInterface = [RokuRemoteNetworkInterface new];
-		[_channelNetworkInterface configureSession];
-		[_channelNetworkInterface setRemoteDelegate:self];
-		_rokuChannels = [@[] mutableCopy];
 		
+		_deviceEnumerator = [RokuDeviceEnumerator sharedEnumerator];
+		
+		
+
 	}
 	return self;
 	
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-	
-	[self.channelNetworkInterface sendRokuRequest:RokuRemoteRequestChannelListing channelID:-1];
-    // Do view setup here.
+
+	[super viewDidLoad];
 	
 	[[self channelCollectionView] registerClass:[RokuRemoteChannelCollectionViewItem class] forItemWithIdentifier:@"com.tmmt.rokuRemote.channelView"];
 	
+	[self.deviceEnumerator addObserver:self forKeyPath:@"rokuDevices" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+	[self.deviceEnumerator enumerateRokuDevices];
+	[[self deviceArrayController] setContent:self.deviceEnumerator.rokuDevices];
+	
 }
+
+
+//MARK: - Key Value Observing -
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+	
+	if ([keyPath isEqualToString:@"rokuDevices"])
+	{
+		if (change[NSKeyValueChangeOldKey])
+		{
+			[change[NSKeyValueChangeOldKey] removeObserver:self forKeyPath:@"channelCount"];
+		}
+		
+		self.currentDevice = self.deviceEnumerator.rokuDevices.lastObject;
+		
+		[self.currentDevice addObserver:self forKeyPath:@"channelCount" options:NSKeyValueObservingOptionNew context:nil];
+		
+		self.numberOfChannels = self.currentDevice.deviceChannels.count;
+		
+		[[NSOperationQueue mainQueue] addOperationWithBlock:^{
+			[[self channelCollectionView] reloadData];
+			[[self channelTableView] reloadData];
+		}];
+
+
+	}
+	else if ([keyPath isEqualToString:@"channelCount"])
+	{
+		self.numberOfChannels = self.currentDevice.deviceChannels.count;
+		
+		[[NSOperationQueue mainQueue] addOperationWithBlock:^{
+			[self.channelCollectionView reloadData];
+			[self.channelTableView reloadData];
+		}];
+
+	}
+	else
+	{
+		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+	}
+	
+}
+
 
 //MARK: - NSTableViewDataSource Methods -
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-	
-	return self.numberOfChannels;
+
+	return self.deviceEnumerator.rokuDevices.count;
 	
 }
 
-
-- (nullable id)tableView:(NSTableView *)tableView objectValueForTableColumn:(nullable NSTableColumn *)tableColumn row:(NSInteger)row
+- (nullable NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(nullable NSTableColumn *)tableColumn row:(NSInteger)row
 {
-	NSString *retValue = nil;
 	
-	if ([tableColumn.identifier isEqualToString:@"rokuChannelName"])
+	RokuTableCellView *retView = [tableView makeViewWithIdentifier:@"rokuDeviceCell" owner:self];
+	
+	[retView setObjectValue:self.deviceEnumerator.rokuDevices[row]];
+	
+	return retView;
+	
+}
+
+- (void)tableViewSelectionDidChange:(NSNotification *)notification
+{
+	
+	if (self.channelTableView.selectedRow!=-1)
 	{
-		retValue = [[[self.channelsElement children] objectAtIndex:row] stringValue];
+		[[NSOperationQueue mainQueue] addOperationWithBlock:^{
+			self.currentDevice = self.deviceEnumerator.rokuDevices[self.channelTableView.selectedRow];
+			[self.currentDevice sendRokuRequest:RokuRemoteRequestActiveApp channelID:-1];			
+		}];
+	}
+	
+}
+
+- (RokuDeviceModel *)tableView:(NSTableView *)tableView objectValueForTableColumn:(nullable NSTableColumn *)tableColumn row:(NSInteger)row
+{
+	RokuDeviceModel *retValue = nil;
+	
+	if ([tableColumn.identifier isEqualToString:@"rokuDeviceCell"])
+	{
+		retValue = [self.deviceEnumerator.rokuDevices objectAtIndex:row];
 	}
 	else
 	{
-		retValue = [[(NSXMLElement *)[[self.channelsElement children] objectAtIndex:row] attributeForName:@"id"] stringValue];
+		retValue = nil;
 	}
 	
 	return retValue;
@@ -90,93 +164,12 @@
 	
 	RokuRemoteChannelCollectionViewItem *collectionViewItem = [collectionView makeItemWithIdentifier:@"com.tmmt.rokuRemote.channelView" forIndexPath:indexPath];
 
-	[collectionViewItem setRepresentedObject:[[self rokuChannels] objectAtIndex:[indexPath indexAtPosition:indexPath.length-1]]];
+	[collectionViewItem setRepresentedObject:[[self currentDevice].deviceChannels objectAtIndex:[indexPath indexAtPosition:indexPath.length-1]]];
 	
 	return collectionViewItem;
 	
 }
 
-//MARK: - RokuRemoteNetworkInterfaceDelegate Methods -
-
-- (void)networkInterface:(RokuRemoteNetworkInterface *)networkInterface receivedData:(NSData *)data forChannel:(NSUInteger)rokuChannelID
-{
-
-	NSUInteger rokuChannelIndex = [[self rokuChannels] indexOfObjectPassingTest:^BOOL(RokuChannelModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-		
-		if (obj.channelID == rokuChannelID)
-		{
-			*stop = YES;
-			return YES;
-		}
-		
-		return NO;
-	}];
-	
-	RokuChannelModel *model = [[self rokuChannels] objectAtIndex:rokuChannelIndex];
-	
-	NSImage *channelIcon = [[NSImage alloc] initWithData:data];
-	
-	model.channelImage = channelIcon;
-	
-//	NSLog(@"Data is: %@", data);
-	
-	
-}
-
-- (void)processRokuChannels:(NSXMLElement *)channelsElement
-{
-
-	[[self rokuChannels] removeAllObjects];
-	
-	[[[self channelsElement] children] enumerateObjectsUsingBlock:^(NSXMLNode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-		
-		NSXMLElement *element = (NSXMLElement *)obj;
-		
-		RokuChannelModel *channelModel = [[RokuChannelModel alloc] initWithChannelName:element.stringValue channelID:[[element attributeForName:@"id"].stringValue integerValue]];
-		
-		[[self rokuChannels] addObject:channelModel];
-		
-		[[NSOperationQueue mainQueue] addOperationWithBlock:^{
-		
-			[self.channelNetworkInterface sendRokuRequest:RokuRemoteRequestChannelIcon channelID:channelModel.channelID];
-			
-		}];
-		
-	}];
-	
-	[[NSOperationQueue mainQueue] addOperationWithBlock:^{
-		[self.channelTableView reloadData];
-		[self.channelCollectionView reloadData];
-	}];
-
-	
-	
-}
-
-- (void)networkInterface:(RokuRemoteNetworkInterface *)networkInterface receivedData:(NSData *)data forRequest:(RokuRemoteRequest)remoteRequest
-{
-	
-	switch (remoteRequest)
-	{
-		case RokuRemoteRequestChannelListing:
-		{
-			NSXMLDocument *channelListingDocument = [[NSXMLDocument alloc] initWithData:data options:0 error:nil];
-			NSArray<NSXMLNode *> *channels = [[channelListingDocument rootElement] children];
-			NSLog(@"Channels: %@", channels);
-			self.numberOfChannels = channels.count;
-			self.channelsElement = channelListingDocument.rootElement;
-			
-			[self processRokuChannels:self.channelsElement];
-			
-			
-		}
-			break;
-		default:
-			break;
-			
-	}
-	
-}
 
 
 @end

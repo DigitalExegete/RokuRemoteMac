@@ -135,6 +135,8 @@ NSString * const kRokuRemoteActionKey = @"rokuAction";
 			CAShapeLayer * text6 = [CAShapeLayer layer];
 			text6.frame = CGRectMake(35.33, 27.66, 23.53, 55.35);
 			text6.path = [self text6Path].quartzPath;
+			[text6 setValue:@(RokuRemoteUp) forKey:kRokuRemoteActionKey];
+
 			[upArrowLayer addSublayer:text6];
 			self.layers[@"text6"] = text6;
 		}
@@ -142,11 +144,14 @@ NSString * const kRokuRemoteActionKey = @"rokuAction";
 		CALayer * downArrowLayer = [CALayer layer];
 		downArrowLayer.frame = CGRectMake(127.91, 48.66, 94.19, 79.23);
 		[RokuCrossLayer addSublayer:downArrowLayer];
+		[downArrowLayer setValue:@(RokuRemoteDown) forKey:kRokuRemoteActionKey];
 		self.layers[@"downArrowLayer"] = downArrowLayer;
 		{
 			CAShapeLayer * text7 = [CAShapeLayer layer];
 			text7.frame = CGRectMake(35.33, -2.16, 23.53, 55.35);
 			text7.path = [self text7Path].quartzPath;
+			[text7 setValue:@(RokuRemoteDown) forKey:kRokuRemoteActionKey];
+
 			[downArrowLayer addSublayer:text7];
 			self.layers[@"text7"] = text7;
 		}
@@ -223,7 +228,7 @@ NSString * const kRokuRemoteActionKey = @"rokuAction";
 	}
 	if(!layerIds || [layerIds containsObject:@"upArrowLayer"]){
 		CALayer * upArrowLayer = self.layers[@"upArrowLayer"];
-		upArrowLayer.backgroundColor = [NSColor colorWithRed:1 green: 1 blue:1 alpha:0.025].CGColor;
+		upArrowLayer.backgroundColor = [NSColor colorWithRed:1 green: 1 blue:1 alpha:0.05].CGColor;
 	}
 	if(!layerIds || [layerIds containsObject:@"text6"]){
 		CAShapeLayer * text6 = self.layers[@"text6"];
@@ -232,7 +237,7 @@ NSString * const kRokuRemoteActionKey = @"rokuAction";
 	}
 	if(!layerIds || [layerIds containsObject:@"downArrowLayer"]){
 		CALayer * downArrowLayer = self.layers[@"downArrowLayer"];
-		downArrowLayer.backgroundColor = [NSColor colorWithRed:1 green: 1 blue:1 alpha:0.025].CGColor;
+		downArrowLayer.backgroundColor = [NSColor colorWithRed:1 green: 1 blue:1 alpha:0.05].CGColor;
 	}
 	if(!layerIds || [layerIds containsObject:@"text7"]){
 		CAShapeLayer * text7 = self.layers[@"text7"];
@@ -385,7 +390,7 @@ NSString * const kRokuRemoteActionKey = @"rokuAction";
 	
 	CALayer *crossLayer = self.layers[@"RokuCrossLayer"];
 	crossLayer.sublayerTransform = CATransform3DConcat(CATransform3DMakeScale(0.714285, 0.714285, 1), CATransform3DMakeTranslation(-49.5, -49.5, 1));
-
+	[self.layer setBorderColor:[NSColor redColor].CGColor];
 	
 }
 
