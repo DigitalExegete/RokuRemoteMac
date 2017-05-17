@@ -40,9 +40,11 @@ import Cocoa
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.expandButton?.image = UserDefaults.standard.bool(forKey: "remoteExpanded") ? NSImage(named: NSImageNameGoLeftTemplate) : NSImage(named: NSImageNameGoRightTemplate)
+		self.expandButton?.image = UserDefaults.standard.bool(forKey: "remoteExpanded") ? NSImage(named: NSImageNameGoRightTemplate) : NSImage(named: NSImageNameGoRightTemplate)
 		
 		rokuRemoteViewWidth?.animator().constant = UserDefaults.standard.bool(forKey: "remoteExpanded") ? self.expandedViewWidth : self.collapsedViewWidth
+
+		self.expandButton?.animator().frameCenterRotation = UserDefaults.standard.bool(forKey: "remoteExpanded") ? 180 : 0
 
 		
 		NotificationCenter.default.addObserver(forName: Notification.Name.NSTableViewSelectionDidChange, object: self.deviceTableView, queue: nil) { (note: Notification) in
@@ -60,7 +62,10 @@ import Cocoa
 	@IBAction func expandButtonClicked(sender: NSButton?) {
 		
 		rokuRemoteViewWidth?.animator().constant = (sender?.state==NSOnState) ? self.expandedViewWidth : self.collapsedViewWidth
-		self.expandButton?.animator().image = (sender?.state==NSOnState) ? NSImage(named: NSImageNameGoLeftTemplate) : NSImage(named: NSImageNameGoRightTemplate)
+		
+		self.expandButton?.animator().image = (sender?.state==NSOnState) ? NSImage(named: NSImageNameGoRightTemplate) : NSImage(named: NSImageNameGoRightTemplate)
+		
+		self.expandButton?.animator().frameCenterRotation = (sender?.state==NSOnState) ? 180 : 0
 
 	}
 	

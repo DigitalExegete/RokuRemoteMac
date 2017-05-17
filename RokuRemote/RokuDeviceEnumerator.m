@@ -43,6 +43,21 @@ NSString * const ssdpDiscoveryPacket = @"M-SEARCH * HTTP/1.1\r\nHost: 239.255.25
 		
 		sharedDeviceEnumerator = [[RokuDeviceEnumerator alloc] init];
 		
+		if ( [[NSUserDefaults standardUserDefaults] valueForKey:@"detectedRokuDevices"] == nil)
+		{
+			[[NSUserDefaults standardUserDefaults] setValue:@[] forKey:@"detectedRokuDevices"];
+		}
+		
+		
+		
+		[[[NSUserDefaults standardUserDefaults] arrayForKey:@"detectedRokuDevices"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+			
+			[sharedDeviceEnumerator parseRokuNotificationData:obj];
+			
+		}];
+		
+		
+		
 	});
 	
 	return sharedDeviceEnumerator;
@@ -62,6 +77,7 @@ NSString * const ssdpDiscoveryPacket = @"M-SEARCH * HTTP/1.1\r\nHost: 239.255.25
 		return ;
 	}
 
+	[self.enumeratorSocket joinMulticastGroup:@"239.255.255.250" error:nil];
 
 	if (![self.enumeratorSocket beginReceiving:&socketError])
 	{
@@ -75,10 +91,7 @@ NSString * const ssdpDiscoveryPacket = @"M-SEARCH * HTTP/1.1\r\nHost: 239.255.25
 		
 	}];
 	
-	
-	[self parseRokuNotificationData:@"LOCATION: http://192.168.1.52:8060/\n"];
-	[self parseRokuNotificationData:@"LOCATION: http://192.168.1.178:8060/\n"];
-	
+
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error
@@ -95,19 +108,52 @@ NSString * const ssdpDiscoveryPacket = @"M-SEARCH * HTTP/1.1\r\nHost: 239.255.25
 - (void)parseRokuNotificationData:(NSString *)rokuResponse
 {
 	
-	NSRange locationOfLocation = [rokuResponse rangeOfString:@"LOCATION: "  options:NSCaseInsensitiveSearch];
-	NSRange locationOfEnd = [rokuResponse rangeOfString:@"8060/"];
+	NSString *realAddress = rokuResponse;
+
+	//Check to see if we need to filter the string.
+	if ([rokuResponse containsString:@"LOCATION"])
+	{
+		NSRange locationOfLocation = [rokuResponse rangeOfString:@"LOCATION: "  options:NSCaseInsensitiveSearch];
+		NSRange locationOfEnd = [rokuResponse rangeOfString:@"8060/"];
+		
+		NSString *address = [rokuResponse substringWithRange:NSMakeRange(locationOfLocation.location+locationOfLocation.length, locationOfEnd.location-(locationOfLocation.location+locationOfLocation.length)+4)];
+		NSArray<NSString *> *componenets = [address componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+		
+		realAddress = componenets.firstObject;
+	}
 	
-	NSString *address = [rokuResponse substringWithRange:NSMakeRange(locationOfLocation.location+locationOfLocation.length, locationOfEnd.location-(locationOfLocation.location+locationOfLocation.length)+4)];
-	NSArray<NSString *> *componenets = [address componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+	NSMutableArray<NSString *> *ipArray = [[NSUserDefaults standardUserDefaults] mutableArrayValueForKey:@"detectedRokuDevices"];
 	
-	NSString *realAddress = componenets.firstObject;
+	if (![ipArray containsObject:realAddress])
+	{
+		[ipArray addObject:realAddress];
+		
+		[[NSOperationQueue mainQueue] addOperationWithBlock:^{
+			[[NSUserDefaults standardUserDefaults] setValue:ipArray forKey:@"detectedRokuDevices"];
+		}];
+
+	}
 	
-	RokuDeviceModel *newModel = [[RokuDeviceModel alloc] initWithIPAddress:realAddress];
+	__block BOOL addDevice = YES;
 	
-	[newModel configureDevice];
+	[self.rokuDevices enumerateObjectsUsingBlock:^(RokuDeviceModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+		
+		if ([obj.ipAddress isEqualToString:realAddress])
+		{
+			addDevice = NO;
+			*stop = YES;
+		}
+		
+	}];
 	
-	[[self mutableArrayValueForKey:@"rokuDevices"] addObject:newModel];
+	if (addDevice)
+	{
+		RokuDeviceModel *newModel = [[RokuDeviceModel alloc] initWithIPAddress:realAddress];
+		
+		[newModel configureDevice];
+		
+		[[self mutableArrayValueForKey:@"rokuDevices"] addObject:newModel];
+	}
 	
 	
 	
@@ -130,7 +176,7 @@ withFilterContext:(nullable id)filterContext
 	}
 	else
 	{
-//		[self parseRokuNotificationData:searchData];
+		[self parseRokuNotificationData:searchData];
 	}
 	
 	NSLog(@"Address: %@", address);
