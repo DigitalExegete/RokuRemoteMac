@@ -138,7 +138,6 @@
 				ED1C19871EAD93B700941838 /* RemoteController */,
 				ED1C19761EAD90D100941838 /* AppDelegate.h */,
 				ED1C19771EAD90D100941838 /* AppDelegate.m */,
-				ED1C197C1EAD90D100941838 /* Assets.xcassets */,
 				ED1C197E1EAD90D100941838 /* MainMenu.xib */,
 				ED1C19811EAD90D100941838 /* Info.plist */,
 				ED1C19791EAD90D100941838 /* Supporting Files */,
@@ -212,6 +211,7 @@
 		ED895AD81EC81314001A64EB /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				ED1C197C1EAD90D100941838 /* Assets.xcassets */,
 				ED895ADA1EC94685001A64EB /* ToolbarTopSites.pdf */,
 				EDE9F1871EC2F1D8002B761B /* QCMethod.h */,
 				EDE9F1881EC2F1D8002B761B /* QCMethod.m */,

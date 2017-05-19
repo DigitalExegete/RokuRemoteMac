@@ -16,7 +16,7 @@
 @property (readwrite, copy) NSString *ipAddress;
 @property (readwrite, copy) NSString *deviceName;
 @property (readwrite, copy) NSString *modelNumber;
-
+@property (readwrite, strong) NSImage *deviceImage;
 
 @end
 
@@ -119,6 +119,21 @@
 	
 }
 
+- (NSImage *)deviceImageForRokuModel:(NSString *)model
+{
+	
+	NSImage *retImage = nil;
+	
+	if ([model isEqualToString:@"4210X"])
+	{
+		retImage = [NSImage imageNamed:@"player_mustang_1"];
+	}
+	
+	return retImage;
+	
+}
+
+
 - (void)processRokuDeviceInfo:(NSXMLDocument *)deviceInfo
 {
 	
@@ -127,6 +142,7 @@
 	[[NSOperationQueue mainQueue] addOperationWithBlock:^{
 		self.modelNumber = [[[rootElement elementsForName:@"model-number"] firstObject] stringValue];
 		self.deviceName = [[[rootElement elementsForName:@"model-name"] firstObject] stringValue];
+		self.deviceImage = [self deviceImageForRokuModel:self.modelNumber];
 	}];
 	
 }

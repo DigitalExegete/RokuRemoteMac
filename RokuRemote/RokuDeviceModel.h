@@ -23,6 +23,7 @@
 @property (readonly, copy) NSString *ipAddress;
 @property (readonly, copy) NSString *deviceName;
 @property (readonly, copy) NSString *modelNumber;
+@property (readonly, strong) NSImage *deviceImage;
 
 - (instancetype)initWithIPAddress:(NSString *)ipaddress;
 - (NSInteger)sendRokuCommand:(RokuRemoteControlActions)action;
