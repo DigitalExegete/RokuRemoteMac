@@ -57,6 +57,19 @@ import Cocoa
 			
 			
 		}
+
+        if (self.deviceTableView?.numberOfRows as Int!) > 0 && self.deviceTableView?.selectedRow != -1 {
+
+
+
+            if let deviceTableCellView: RokuTableCellView = self.deviceTableView?.view(atColumn: 0, row: (self.deviceTableView?.selectedRow)!, makeIfNecessary: false) as? RokuTableCellView {
+                
+                self.deviceModel = deviceTableCellView.objectValue
+                
+            }
+        }
+
+
 	}
 	
 	@IBAction func expandButtonClicked(sender: NSButton?) {
@@ -83,7 +96,17 @@ import Cocoa
 		 //(forSegment:UInt((sender?.selectedSegment))
 		
 		let realAction: RokuRemoteControlActions = RokuRemoteControlActions.init(rawValue: UInt((segCell?.tag(forSegment: (sender?.selectedSegment)!))!))!
-		let currentDevice = self.deviceModel
+
+        if self.deviceModel == nil {
+            if let deviceTableCellView: RokuTableCellView = self.deviceTableView?.view(atColumn: 0, row: (self.deviceTableView?.selectedRow)!, makeIfNecessary: false) as? RokuTableCellView {
+
+                self.deviceModel = deviceTableCellView.objectValue
+
+            }
+
+        }
+
+        let currentDevice = self.deviceModel
 		currentDevice?.sendRokuKeypressCommand(realAction)
 
 		

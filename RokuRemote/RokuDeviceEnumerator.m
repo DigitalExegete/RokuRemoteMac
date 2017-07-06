@@ -84,6 +84,10 @@ NSString * const ssdpDiscoveryPacket = @"M-SEARCH * HTTP/1.1\r\nHost: 239.255.25
 		NSLog(@"Failed to start receiving: %@", [socketError localizedDescription]);
 	}
 
+    [self.enumeratorSocket sendData:[ssdpDiscoveryPacket dataUsingEncoding:NSUTF8StringEncoding]
+                             toHost: @"239.255.255.250" port: 1900 withTimeout:-1 tag:1];
+
+
 	[NSTimer scheduledTimerWithTimeInterval:60 repeats:YES block:^(NSTimer * _Nonnull timer) {
 		
 		[self.enumeratorSocket sendData:[ssdpDiscoveryPacket dataUsingEncoding:NSUTF8StringEncoding]
